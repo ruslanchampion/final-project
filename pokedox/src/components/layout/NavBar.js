@@ -12,7 +12,7 @@ export default class NavBar extends Component {
           justifyContent: 'center',
         }}>
           <a className="navbar-brand col-sm-3 col-md-2 mr-0 align-items navbar-scroll"
-          href="#app"
+          href="#/"
           >
             Pokemons
             </a>
