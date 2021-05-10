@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+
 
 
 export default class NavBar extends Component {
@@ -8,11 +8,20 @@ export default class NavBar extends Component {
       <div>
         <nav className="navbar navbar-expand-md navbar-dark fixed-top" style={{
           backgroundColor: '#ef5350',
-          color: 'white'
+          color: 'white',
+          justifyContent: 'center',
         }}>
-          <a
+          <a className="navbar-brand col-sm-3 col-md-2 mr-0 align-items navbar-scroll"
           href="#app"
-          >PokeDox</a>
+          >
+            Pokemons
+            </a>
+            
+          <a className="navbar-brand col-sm-5 col-md-2 mr-0 align-items navbar-scroll"
+          href="#app"
+          >
+            Captured Pokemons
+            </a>
         </nav>
       </div>
     )

@@ -1,13 +1,21 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import NavBar from './components/layout/NavBar'
+import "./App.css";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import NavBar from "./components/layout/NavBar";
+import Dashboard from "./components/layout/Dashboard";
+import Pokemon from './components/pokemon/Pokemon'
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hola Senior</h1>
-      <NavBar/>
-    </div>
+    <Router>
+      <div className="App">
+        <NavBar />
+        <div className="container">
+          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/pokemon/:pokemonIndex" component={Pokemon} />
+        </div>
+      </div>
+    </Router>
   );
 }
 
