@@ -78,7 +78,14 @@ export default class PokemonCard extends Component {
             </div>
           </Card>
         </StyledLink>
-        {fromCuptured ? buttonCuptured : null}
+        {fromCuptured ? buttonCuptured 
+        : <button
+        onClick={() => onToggleCuptured(name, pokemonIndex)}
+        className="btn btn-danger mx-auto d-block mt-2"
+      >
+        Delete
+      </button>
+        }
       </div>
     );
   }

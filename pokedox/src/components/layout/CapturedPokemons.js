@@ -17,6 +17,7 @@ export default class CapturedPokemons extends Component {
               name={pokemon.name}
               url={pokemon.url}
               pokemonsCaptured={this.props.pokemonsCaptured}
+              onToggleCuptured={ this.props.onToggleCuptured}
               />
             ))}
           </div>

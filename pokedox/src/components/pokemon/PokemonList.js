@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import PokemonCard from "./PokemonCard";
 export default class PokemonList extends Component {
-
   _isMounted = false;
 
   state = {
@@ -25,25 +24,26 @@ export default class PokemonList extends Component {
     this.setState({
       currentUrl: this.state.next,
     });
-  }
+  };
 
   changeOnPreviousPage = () => {
     this.setState({
       currentUrl: this.state.previous,
     });
-  }
+  };
 
   async componentDidUpdate() {
     this._isMounted = true;
     const res = await axios.get(this.state.currentUrl);
-    localStorage.currentUrl = this.state.currentUrl
+    localStorage.currentUrl = this.state.currentUrl;
 
-    if(this._isMounted) {
-    this.setState({
-      pokemon: res.data.results,
-      previous: res.data.previous,
-      next: res.data.next,
-    })};
+    if (this._isMounted) {
+      this.setState({
+        pokemon: res.data.results,
+        previous: res.data.previous,
+        next: res.data.next,
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -71,10 +71,12 @@ export default class PokemonList extends Component {
             <div className="d-flex justify-content-center">
               <nav aria-label="Page navigation ">
                 <ul className="pagination pagination-lg">
-
                   {this.state.previous ? (
                     <li className="page-item ">
-                      <button className="page-link" onClick={this.changeOnPreviousPage}>
+                      <button
+                        className="page-link"
+                        onClick={this.changeOnPreviousPage}
+                      >
                         <span aria-hidden="true">&laquo;</span> Previous
                       </button>
                     </li>
@@ -88,7 +90,10 @@ export default class PokemonList extends Component {
 
                   {this.state.next ? (
                     <li className="page-item">
-                      <button className="page-link" onClick={this.changeOnNextPage}>
+                      <button
+                        className="page-link"
+                        onClick={this.changeOnNextPage}
+                      >
                         Next <span aria-hidden="true">&raquo;</span>
                       </button>
                     </li>

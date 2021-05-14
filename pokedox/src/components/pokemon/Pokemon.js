@@ -80,7 +80,7 @@ export default class Pokemon extends Component {
 
     const abilities = pokemonRes.data.abilities.map((ability) => {
       return toUpperCaseAllWords(ability.ability.name);
-    });
+    }).join(', ');
 
     const evs = pokemonRes.data.stats
       .filter((stat) => {
