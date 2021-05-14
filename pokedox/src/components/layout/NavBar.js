@@ -18,7 +18,7 @@ export default class NavBar extends Component {
             </a>
             
           <a className="navbar-brand col-sm-5 col-md-2 mr-0 align-items navbar-scroll"
-          href="#app"
+          href="#captured_pokemons"
           >
             Captured Pokemons
             </a>

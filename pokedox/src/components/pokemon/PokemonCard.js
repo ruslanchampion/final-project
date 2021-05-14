@@ -1,40 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { Spinner } from "../spinner/Spinner";
-
-const Sprite = styled.img`
-  width: 5em;
-  height: 5em;
-  display: none;
-`;
-
-const Card = styled.div`
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  &:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  }
-  -webkit-user-select: none;
-  & img {
-    width: 100px;
-    height: 100px;
-    user-drag: none;
-  }
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-    &:focus,
-    &:hover,
-    &:visited,
-    &:link,
-    &:active {
-      text-decoration: none;
-      color: black;
-    }
-`
+import { isNameInArr, toUpperCaseAllWords, } from "../utils/utils";
+import { Sprite, Card, StyledLink } from "./styled_components";
 export default class PokemonCard extends Component {
   state = {
     name: "",
@@ -42,24 +9,45 @@ export default class PokemonCard extends Component {
     pokemonIndex: "",
     imageLoading: true,
     error: false,
+    url: "",
   };
 
   componentDidMount() {
     const { name, url } = this.props;
     const pokemonIndex = url.split("/")[url.split("/").length - 2];
     const imageUrl = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${pokemonIndex}.png?raw=true`;
-    this.setState({ name, imageUrl, pokemonIndex });
+    this.setState({ name, imageUrl, pokemonIndex, url });
   }
 
   render() {
     const { imageUrl, error, imageLoading, pokemonIndex, name } = this.state;
+    const { onToggleCuptured, pokemonsCaptured, fromCuptured } = this.props;
+
+    const buttonCuptured = isNameInArr(pokemonsCaptured, name) ? (
+      <button className="btn btn-secondary mx-auto d-block mt-2" disabled>
+        Cuptured
+      </button>
+    ) : (
+      <button
+        onClick={() => onToggleCuptured(name, pokemonIndex)}
+        className="btn btn-danger mx-auto d-block mt-2"
+      >
+        Cuptured
+      </button>
+    );
 
     return (
       <div className="col-md-3 col-sm-6 mb-5">
         <StyledLink to={`pokemon/${pokemonIndex}`}>
           <Card className="card">
-            <h5 className="card-header">{pokemonIndex}</h5>
-
+            <h5 className="card-header d-flex justify-content-between">{pokemonIndex}
+            
+              <span className="badge badge-light  font-weight-light text-wrap fs-6">
+                {isNameInArr(pokemonsCaptured, name)
+                  ? isNameInArr(pokemonsCaptured, name).date
+                  : null}
+              </span>
+            </h5>
             {imageLoading ? <Spinner /> : null}
 
             <Sprite
@@ -75,6 +63,7 @@ export default class PokemonCard extends Component {
                   : { display: "block" }
               }
             />
+            
             {error ? (
               <h6 className="mx-auto">
                 <span className="badge badge-danger mt-2">
@@ -85,18 +74,11 @@ export default class PokemonCard extends Component {
             ) : null}
 
             <div className="card-body mx-auto">
-              <h6 className="card-title">
-                {name
-                  .toLowerCase()
-                  .split(" ")
-                  .map(
-                    (word) => word.charAt(0).toUpperCase() + word.substring(1)
-                  )
-                  .join(" ")}
-              </h6>
+              <h6 className="card-title">{toUpperCaseAllWords(name)}</h6>
             </div>
           </Card>
         </StyledLink>
+        {fromCuptured ? buttonCuptured : null}
       </div>
     );
   }

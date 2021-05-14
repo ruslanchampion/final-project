@@ -3,10 +3,11 @@ import PokemonList from '../pokemon/PokemonList'
 
 export default class Dashboard extends Component {
   render() {
+    const {onToggleCuptured, pokemonsCaptured} = this.props
     return (
       <div className="row">
         <div className="col">
-          <PokemonList/>
+          <PokemonList onToggleCuptured={onToggleCuptured} pokemonsCaptured={pokemonsCaptured}/>
         </div>
         
       </div>
