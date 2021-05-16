@@ -1,0 +1,10 @@
+.App {
+  padding-top: 4rem;
+  min-height: 100vh;
+}
+
+@media (max-width: 576px) { 
+  .App {
+    padding-top: 8rem;
+  } 
+}
